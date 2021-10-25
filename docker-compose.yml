@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  #MySql Database
+  mysql_db:
+    image: mysql:latest
+    container_name: mysql_db
+    restart: unless-stopped
+    env_file:
+      - ./mysql_db.env
+    volumes:
+      - ./mysql_db:/var/lib/
+    command: --default-authentication-plugin=mysql_native_password
+
+  app:
+    image: php
+    build: ./cinema_app
+    container_name: php_app
+    restart: unless-stopped
+    working_dir: /var/www/cinema_app
+    volumes:
+      - ./cinema_app:/var/www/cinema_app
+    depends_on:
+      - mysql_db
