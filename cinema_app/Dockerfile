@@ -18,18 +18,18 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
 # Install composer
-RUN curl -sS https://getcompser.org/installer | php -- \
+RUN curl -sS https://getcomposer.org/installer | php -- \
 	--install-dir=/usr/local/bin \
 	--filename=composer
 
 
 # Add user for application
-RUN groupadd -g 100 app
+RUN groupadd -g 1000 app
 RUN useradd -u 1000 -ms /bin/bash -g app app
 
 
 # Copy existing application directory contents
-COPY ./cinema_app  /var/www/cinema_app
+COPY .  /var/www/cinema_app
 
 
 # Copy existing application directory permissions

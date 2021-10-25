@@ -22,3 +22,19 @@ services:
       - ./cinema_app:/var/www/cinema_app
     depends_on:
       - mysql_db
+
+
+  nginx_proxy:
+    image: nginx:latest
+    container_name: nginx_proxy
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./cinema_app:/var/www/cinema_app
+      - ./docker/nginx/local_http_app.conf:/etc/nginx/conf.d/app.conf
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    depends_on:
+      - app
