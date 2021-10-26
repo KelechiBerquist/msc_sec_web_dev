@@ -7,40 +7,48 @@ include __DIR__ . '/MovieController.php';
 
 
 class Router{
-
-	private $request;
-
-	public function __construct($request){
-		$this->request = $request;
-	}
-
-	public function get($route, $funcName){
-
-		$uri = trim( $this->request, "/" );
-		$uri = explode("/", $uri);
-
-
-		if($uri[0] == trim($route, "/")){
-			/*
-				class and method name are passed as a string.
-				The funtion below executes the class method
-			 */
-			call_user_func($funcName);
-		}
-
-	}
-
-	public function post($route, $file){
-
-		$uri = trim( $this->request, "/" );
-		$uri = explode("/", $uri);
-
-
-		if($uri[0] == trim($route, "/")){
-			array_shift($uri);
-			require __DIR__ . '/../' . $file . '.php';
-
+	public static function route(){
+		switch ($_SERVER["REQUEST_METHOD"]) {
+			case 'GET':
+				Router::get();
+				break;
+			case 'POST':
+				Router::post();
+				break;
 		}
 	}
 
+	public static function get(){
+		switch ($_SERVER["REQUEST_URI"]) {
+			case '/':
+				HomeController::get_home();
+				break;
+			case '/register':
+				UserController::get_user_reg();
+				break;
+			case '/login':
+				UserController::get_login();
+				break;
+			case '/book':
+				MovieController::get_movie_booking();
+				break;
+		}
+	}
+
+	public  static function post(){
+		switch ($_SERVER["REQUEST_URI"]) {
+			case '/':
+				HomeController::post_home();
+				break;
+			case '/register':
+				UserController::post_user_reg();
+				break;
+			case '/login':
+				UserController::post_login();
+				break;
+			case '/book':
+				MovieController::post_movie_booking();
+				break;
+		}
+	}
 }
