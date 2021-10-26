@@ -11,7 +11,8 @@
 
 <h1> Cinema Application </h1>
 
-<a href="/register"> Register as a user </a>
+<a href="/user/register"> Register as a user </a>
+<a href="/movie/register"> Register as a user </a>
 
 
 

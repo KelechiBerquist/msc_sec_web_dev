@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__ . '/routing/Router.php';
+include __DIR__ . '/routers/Router.php';
 
 
 Router::route();
