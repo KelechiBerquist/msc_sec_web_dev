@@ -25,13 +25,13 @@ class MovieRouter{
 			case '/':
 				MovieController::get_movie_listing();
 				break;
-			case 'movie_listing':
+			case 'listing':
 				MovieController::get_movie_listing();
 				break;
-			case 'movie_booking':
+			case 'booking':
 				MovieController::get_movie_booking();
 				break;
-			case 'movie_reg':
+			case 'register':
 				MovieController::get_movie_reg();
 				break;
 		}
@@ -45,13 +45,13 @@ class MovieRouter{
 			case '/':
 				MovieController::post_movie_listing();
 				break;
-			case 'movie_listing':
+			case 'listing':
 				MovieController::post_movie_listing();
 				break;
-			case 'movie_booking':
+			case 'booking':
 				MovieController::post_movie_booking();
 				break;
-			case 'movie_reg':
+			case 'register':
 				MovieController::post_movie_reg();
 				break;
 		}
