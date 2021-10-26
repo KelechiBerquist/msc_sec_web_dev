@@ -10,7 +10,9 @@ services:
       - ./mysql_db.env
     volumes:
       - ./mysql_db:/var/lib/
+      - ./docker/mssql/PE7045_Oct21_cinema.sql:/docker-entrypoint-initdb.d/create_db.sql
     command: --default-authentication-plugin=mysql_native_password
+
 
   app:
     image: php

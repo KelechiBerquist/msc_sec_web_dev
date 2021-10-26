@@ -10,7 +10,8 @@ WORKDIR /var/www/cinema_app
 
 
 # Install dependencies
-RUN apt-get update
+RUN apt-get update && \
+	docker-php-ext-install mysqli pdo pdo_mysql
 
 
 # Clear cache

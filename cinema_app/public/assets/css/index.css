@@ -1,0 +1,17 @@
+body{
+	margin: 50px;
+	padding: 50px;
+	background-color: purple;
+	/* display: block; */
+}
+.container{
+	margin: 50px;
+	padding: 50px;
+	background-color: purple;
+	/* display: block; */
+}
+
+h1 {
+	font-size: 100px;
+	color: navy;
+}
