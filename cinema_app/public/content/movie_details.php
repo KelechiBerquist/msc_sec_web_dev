@@ -1,19 +1,27 @@
 
 
 
-<div> Movie Details </div>
+<!-- <div> Movie Details </div> -->
 <div>
 	<div>
     <?php
-      var_dump($_GET);
-      // echo $_SESSION['movies_by_id']
+      // echo 'GET is <br>';
+      // var_dump($_GET);
+      // echo '<br><br><br><br>';
+      var_dump($_SESSION['movies_by_id']);
+      echo '<br><br><br><br>';
+
+      // if (isset($_SESSION['get_specific_movie_msg'])){
+      //   echo $_SESSION['get_specific_movie_msg'];
+      //   echo '<br><br><br><br>';
+      // }
     ?>
   </div>
 
-	Description
+	<!-- Description
 
 	ticket price
-	rating
+	rating -->
     </div>
 
 </div>

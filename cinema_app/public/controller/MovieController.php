@@ -5,8 +5,7 @@
 
 class MovieController{
 	public static function get_movie_listing(array $uri){
-		$this_uri = array_shift($uri);
-		if ($this_uri == ''){
+		if (count($uri)==0){
 			MovieController::get_all_movies();
 		} else {
 			MovieController::get_specific_movie($uri);
@@ -26,20 +25,17 @@ class MovieController{
 	}
 
 	public static function get_specific_movie(array $uri){
-		var_dump($uri);
-		$movieId = $uri[0];
-		$_SESSION['get_movie_booking_msg'] = 'Hello World! <br> In get_specific_movie() <br> <br>';
+		$movieId = intval($uri[0], 10);
+		$_SESSION['get_specific_movie_msg'] = 'Hello World! <br> In get_specific_movie() <br> <br>';
 		global $repo;
 
 		if (!(isset($_SESSION['movies_by_id']))){
 			$_SESSION['movies_by_id'] = [];
 		}
 
-		if (! (array_key_exists($movieId, $_SESSION['movies_by_id']))){
-			$arr = ["movieID" => $movieId];
-			$this_movie = $repo->find_movies_by_id($arr);
-			$_SESSION['movies_by_id'] = [$movieId => $this_movie];
-		}
+		$this_movie = $repo->find_movie_by_id($movieId);
+		$_SESSION['movies_by_id'][$movieId] = $this_movie;
+
 
 		require __DIR__ . '/../content/movie_details.php';
 

@@ -26,11 +26,11 @@ class Repository {
 		);
 
 		$this->find_movie_by_name_prep = $this->conn->prepare(
-			"SELECT * FROM movies WHERE movie_name LIKE '%:movie_name%';"
+			"SELECT * FROM movies WHERE movie_name = ?;"
 		);
 
 		$this->find_movie_by_id_prep = $this->conn->prepare(
-			"SELECT * FROM movies WHERE movieID = :movie_name;"
+			"SELECT * FROM movies WHERE movieID = ? ;"
 		);
 
 	}
@@ -69,14 +69,21 @@ class Repository {
 		}
 	}
 
-	public function find_movies_by_name(array $arr): array
+	public function find_movie_by_name(string $mname): array
 	{
-		return (array) $this->select_movie_by_name_prep->execute($arr)->fetchAll();
+		$this->find_movie_by_name_prep->bindParam(1, $mname, PDO::PARAM_STR);
+		$this->find_movie_by_name_prep->execute();
+		$movie = (array) $this->find_movie_by_name_prep->fetchAll();
+		return $movie;
 	}
 
-	public function find_movies_by_id(array $arr): array
+	public function find_movie_by_id(string $mid): array
 	{
-		return (array) $this->select_movie_by_id_prep->execute($arr)->fetchAll();
+		$this->find_movie_by_id_prep->bindParam(1, $mid, PDO::PARAM_INT);
+		$this->find_movie_by_id_prep->execute();
+		$movie = (array) $this->find_movie_by_id_prep->fetchAll();
+
+		return $movie;
 	}
 
 	public function select_all_movies(): array
