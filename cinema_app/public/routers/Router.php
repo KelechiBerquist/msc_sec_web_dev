@@ -16,27 +16,6 @@ class Router{
 			Explode routes to get sub routes
 		 */
 		$uri_args = explode("/", $uri);
-		// echo "uri_args <br>";
-		// var_dump($uri_args);
-		// echo "<br><br><br>";
-
-		echo "_SERVER <br>";
-		var_dump($_SERVER);
-		echo "<br><br><br>";
-
-
-
-		echo "_POST <br>";
-		var_dump($_POST);
-		echo "<br><br><br>";
-
-
-		echo "_GET <br>";
-		var_dump($_GET);
-		echo "<br><br><br>";
-
-
-
 		/*
 			array_shift removes the first element from the array and
 			returns the element that was removed.

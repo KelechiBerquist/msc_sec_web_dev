@@ -1,6 +1,40 @@
 <?php include __DIR__ . '/templates/header.php'; ?>
 
+<div>
+	<?php
+		if( isset( $_SESSION['post_movie_reg_msg'] ) ) {
+			echo($_SESSION['post_movie_reg_msg']);
+			unset($_SESSION['post_movie_reg_msg']);
+		}
+
+
+	?>
+
+</div>
+<div>
+	<?php
+		if( isset( $_SESSION['movie_reg_msg'] ) ) {
+			echo($_SESSION['movie_reg_msg']);
+			unset($_SESSION['movie_reg_msg']);
+		}
+	?>
+
+</div>
+
+<div>
+	<?php
+		if( isset( $_SESSION['repo_msg'] ) ) {
+			echo($_SESSION['repo_msg']);
+			unset($_SESSION['repo_msg']);
+		}
+	?>
+
+</div>
+
+
 <h1> Movie Registration </h1>
+
+
 <form method="post" action="/movie/register">
 	<div>
 		<label for="movie_name"> Name of movie </label>

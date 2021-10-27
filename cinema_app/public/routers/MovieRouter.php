@@ -20,13 +20,13 @@ class MovieRouter{
 	public static function get($uri){
 		switch (array_shift($uri)) {
 			case '':
-				MovieController::get_movie_listing();
+				MovieController::get_movie_listing($uri);
 				break;
 			case '/':
-				MovieController::get_movie_listing();
+				MovieController::get_movie_listing($uri);
 				break;
 			case 'listing':
-				MovieController::get_movie_listing();
+				MovieController::get_movie_listing($uri);
 				break;
 			case 'booking':
 				MovieController::get_movie_booking();
@@ -40,56 +40,20 @@ class MovieRouter{
 	public  static function post($uri){
 		switch (array_shift($uri)) {
 			case '':
-				MovieController::post_movie_listing();
+				MovieController::post_movie_listing($uri);
 				break;
 			case '/':
-				MovieController::post_movie_listing();
+				MovieController::post_movie_listing($uri);
 				break;
 			case 'listing':
-				MovieController::post_movie_listing();
+				MovieController::post_movie_listing($uri);
 				break;
 			case 'booking':
-				MovieController::post_movie_booking();
+				MovieController::post_movie_booking($uri);
 				break;
 			case 'register':
 				MovieController::post_movie_reg();
 				break;
 		}
 	}
-
-	// public static function get(){
-	// 	switch ($_SERVER["REQUEST_URI"]) {
-	// 		case '/':
-	// 			HomeController::get_home();
-	// 			break;
-	// 		case '/register':
-	// 			UserController::get_user_reg();
-	// 			break;
-	// 		case '/login':
-	// 			UserController::get_login();
-	// 			break;
-	// 		case '/book':
-	// 			MovieController::get_movie_booking();
-	// 			break;
-	// 	}
-	// }
-
-	// public  static function post(){
-	// 	switch ($_SERVER["REQUEST_URI"]) {
-	// 		case '/':
-	// 			HomeController::post_home();
-	// 			break;
-	// 		case '/register':
-	// 			UserController::post_user_reg();
-	// 			break;
-	// 		case '/login':
-	// 			UserController::post_login();
-	// 			break;
-	// 		case '/book':
-	// 			MovieController::post_movie_booking();
-	// 			break;
-	// 	}
-	// }
-
-
 }

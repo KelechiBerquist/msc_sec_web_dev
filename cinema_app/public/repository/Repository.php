@@ -2,51 +2,91 @@
 
 
 class Repository {
+	private $conn;
+	private $insert_new_movie;
+	private $insert_movie_prep;
+	private $find_movie_by_name_prep;
+
+
+
+
+
 	public function __construct(PDO $connection)
 	{
-		$this->connection = $connection;
+		$this->conn = $connection;
 		$this->failureMessage = [
-			"success_flag" => False
-			, "message" => "Oh oh! Something went wrong. Please try again."
+			"flag" => False
+			, "msg" => "Oh oh! Something went wrong. Please try again."
 		];
-		$this->successMessage = ["success_flag" => True];
+		$this->successMessage = ["flag" => True, "msg"=> "Successful!"];
+
+		$this->insert_movie_prep = $this->conn->prepare(
+			"INSERT INTO movies VALUES " .
+			"(:movieID, :movie_name, :description, :ticket_price, :rating);"
+		);
+
+		$this->find_movie_by_name_prep = $this->conn->prepare(
+			"SELECT * FROM movies WHERE movie_name LIKE '%:movie_name%';"
+		);
+
+		$this->find_movie_by_id_prep = $this->conn->prepare(
+			"SELECT * FROM movies WHERE movieID = :movie_name;"
+		);
+
 	}
 
-	public function insert(array $arr)
+	public function findMaxMovieId()
 	{
-		$sql = "INSERT INTO :table SET ";
+		$maxMovieId = (array) $this->conn->query(
+			"SELECT MAX(movieID) AS maxMovieId FROM movies;"
+		)->fetchAll();
 
-		$row = [];
-		$row['table'] = $arr['table'];
-
-		foreach($arr as $key => $val) {
-			if ($key != 'table') {
-				$row[$key] = $val;
-				$sql = $sql . "  {$key}=:{$key}  ";
-			}
+		$lastMovieId = 0;
+		if (is_null($maxMovieId[0]["maxMovieId"])){
+			$lastMovieId = 0;
+		} else {
+			$lastMovieId = intval($maxMovieId[0]["maxMovieId"], 10);
 		}
-		$sql = $sql . ";";
-		$this->connection->prepare($sql)->execute($row);
+		// echo 'Last movie id is ' . $lastMovieId . '<br><br>';
+		// echo 'Value returned from db is: <br>';
+		// var_dump($maxMovieId);
+		// echo '<br><br>';
+		return $lastMovieId;
 	}
 
-	public function select(array $arr): array
+	public function insert_new_movie(array $arr)
 	{
-		$sql = "SELECT * FROM :table WHERE :where_clause; ";
-		return (array)$this->connection->prepare($sql)->execute($arr)->fetchAll();
+		$returnValue = NULL;
+		try {
+			$arr["movieID"] = NULL;
+			$this->insert_movie_prep->execute($arr);
+			$returnValue = $this->successMessage;
+			$returnValue["msg"] = "Movie insertion was " . $this->successMessage["msg"];
+		} catch (Exception $e){
+			$returnValue = $this->failureMessage;
+		} finally {
+			return $returnValue;
+		}
 	}
 
-	public function delete(array $arr)
+	public function find_movies_by_name(array $arr): array
 	{
-		$sql = "UPDATE :table SET deleted_at = CURRENT_TIMESTAMP() WHERE :where_clause; ";
-		$this->connection->prepare($sql)->execute($arr);
+		return (array) $this->select_movie_by_name_prep->execute($arr)->fetchAll();
 	}
 
-	public function test(): array
+	public function find_movies_by_id(array $arr): array
 	{
-		$sql = "select * from information_schema.tables;";
-		$data = $this->connection->query($sql)->fetchAll();
-		return (array)$data;
+		return (array) $this->select_movie_by_id_prep->execute($arr)->fetchAll();
 	}
 
+	public function select_all_movies(): array
+	{
+		return (array) $this->conn->query("SELECT * FROM movies;")->fetchAll();
+	}
 
 }
+
+$db = require __DIR__ . '/db_settings.php';
+$repo = new Repository($db);
+
+return $repo;

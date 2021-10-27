@@ -3,12 +3,19 @@
 
 <div> Movie Details </div>
 <div>
-	movie Name
+	<div>
+    <?php
+      var_dump($_GET);
+      // echo $_SESSION['movies_by_id']
+    ?>
+  </div>
 
 	Description
 
 	ticket price
 	rating
+    </div>
+
 </div>
 
 <!--
