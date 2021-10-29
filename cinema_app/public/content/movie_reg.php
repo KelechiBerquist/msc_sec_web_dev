@@ -2,9 +2,9 @@
 
 <div>
 	<?php
-		if( isset( $_SESSION['post_movie_reg_msg'] ) ) {
-			echo($_SESSION['post_movie_reg_msg']);
-			unset($_SESSION['post_movie_reg_msg']);
+		if( isset( $_SESSION['movie_reg_msg'] ) ) {
+			echo($_SESSION['movie_reg_msg']);
+			unset($_SESSION['movie_reg_msg']);
 		}
 
 
@@ -40,8 +40,10 @@
 		<label for="movie_name"> Name of movie </label>
 		<input type="text" name="movie_name" id="mov_name"/>
 	</div>
+	<div>
 		<label for="description"> Description </label>
 		<input type="text" name="description" id="mov_description"/>
+	</div>
 	<div>
 		<label for="ticket_price"> Ticket price </label>
 		<input type="text" name="ticket_price" id="mov_ticket_price"/>

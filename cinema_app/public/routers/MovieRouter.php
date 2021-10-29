@@ -16,7 +16,6 @@ class MovieRouter{
 		}
 	}
 
-
 	public static function get($uri){
 		switch (array_shift($uri)) {
 			case '':
@@ -29,7 +28,7 @@ class MovieRouter{
 				MovieController::get_movie_listing($uri);
 				break;
 			case 'booking':
-				MovieController::get_movie_booking();
+				MovieController::get_movie_booking($uri);
 				break;
 			case 'register':
 				MovieController::get_movie_reg();

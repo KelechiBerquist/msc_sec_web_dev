@@ -1,7 +1,7 @@
 <?php
 
 include __DIR__ . '/HomeRouter.php';
-include __DIR__ . '/UserRouter.php';
+include __DIR__ . '/CustomerRouter.php';
 include __DIR__ . '/MovieRouter.php';
 
 
@@ -24,8 +24,8 @@ class Router{
 			case '':
 				HomeRouter::route($uri_args);
 				break;
-			case 'user':
-				UserRouter::route($uri_args);
+			case 'customer':
+				CustomerRouter::route($uri_args);
 				break;
 			case 'movie':
 				MovieRouter::route($uri_args);
