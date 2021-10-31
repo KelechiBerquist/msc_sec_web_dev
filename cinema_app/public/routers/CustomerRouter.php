@@ -29,6 +29,9 @@ class CustomerRouter{
 			case 'login':
 				CustomerController::get_login($uri);
 				break;
+			case 'logout':
+				CustomerController::get_logout();
+				break;
 		}
 	}
 
@@ -45,6 +48,9 @@ class CustomerRouter{
 				break;
 			case 'login':
 				CustomerController::post_login();
+				break;
+			case 'logout':
+				CustomerController::get_logout();
 				break;
 		}
 	}

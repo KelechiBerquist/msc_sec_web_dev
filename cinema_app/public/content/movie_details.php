@@ -2,20 +2,23 @@
 <?php include __DIR__ . '/templates/header.php'; ?>
 
 
-<div class="pad1 w-100">
+<div class="pad-1 w-100">
 <?php
   $movie_name = $_SESSION['listed_movie']['movie_name'];
   $description = $_SESSION['listed_movie']['description'];
   $movieID = $_SESSION['listed_movie']['movieID'];
   $img_caption = "
-    <div class='pad1  w-60 d-inline h-100'>
-      <div class=' w-100 d-inline text-sz-md text-wt-reg pad-tb-2'>
+    <div class='pad-2 w-60 d-inline h-100'>
+      <div class='text-align-center pg-header-banner w-100 d-inline text-sz-md text-wt-reg pad-3'>
         {$movie_name}
       </div>
-      <div class='w-100 d-inline text-sz-rg text-wt-reg text-align-justify pad-tb-2'>
+      <div class='w-100 d-inline text-sz-rg text-wt-reg text-align-justify pad-3 movie-details'>
         {$description}
+
+         <div class='button pad-tb-2 text-align-center text-sz-rg text-wt-reg'> 
+            <a class='button' href='/movie/booking/{$movieID}'> Book now </a>
+        </div>
       </div>
-      <div class='pad-tb-2'> <a href='/movie/booking/{$movieID}'> Book now </a></div>
     </div>
   ";
 

@@ -30,52 +30,81 @@ class MovieController{
 
 
 	public static function get_movie_reg(){
-		require __DIR__ . '/../content/movie_reg.php';
-
+		if (array_key_exists("auth_user", $_SESSION)){
+			require __DIR__ . '/../content/movie_reg.php';
+		} else {
+			$_SESSION['login_msg'] = "Unable to access movie registration. Please login or register to access this page";
+			$_SESSION['view_msg'] = "Unable to access movie registration. Please login or register to access this page";
+			$statusCode = 303;
+			header('Location: ' . '/customer/login', true, $statusCode);
+			die();
+		}
 	}
 	public static function post_movie_reg(){
-		$arr = (array) $_POST;
-		global $repo;
+		if (array_key_exists("auth_user", $_SESSION)){
+			$arr = (array) $_POST;
+			global $repo;
 
-		$arr["movieID"] = NULL;
-		$movieAdded = $repo->insert_new_movie($arr);
-		$statusCode = 303;
-		$_SESSION['movie_reg_msg'] = $movieAdded["msg"];
-		header('Location: ' . '/movie/register', true, $statusCode);
-		die();
+			$arr["movieID"] = NULL;
+			$movieAdded = $repo->insert_new_movie($arr);
+			$statusCode = 303;
+			$_SESSION['movie_reg_msg'] = $movieAdded["msg"];
+			$_SESSION['view_msg'] = $movieAdded["msg"];
+			header('Location: ' . '/movie/register', true, $statusCode);
+			die();
+		} else {
+			$_SESSION['login_msg'] = "Unable to access movie registration. Please login or register to access this page";
+			$_SESSION['view_msg'] = "Unable to access movie registration. Please login or register to access this page";
+			$statusCode = 303;
+			header('Location: ' . '/customer/login', true, $statusCode);
+			die();
+		}
 
 	}
 
 
 	public static function get_movie_booking($uri){
 		global $repo;
-		$movieId = intval($uri[0], 10);
-		$_SESSION['booked_movie'] = $repo->find_movie_by_id($movieId)[0];
 
-		require __DIR__ . '/../content/movie_booking.php';
+		if (array_key_exists("auth_user", $_SESSION)){
+			$movieId = intval($uri[0], 10);
+			$_SESSION['booked_movie'] = $repo->find_movie_by_id($movieId)[0];
+
+			require __DIR__ . '/../content/movie_booking.php';
+		} else {
+			$_SESSION['login_msg'] = "Unable to access movie booking. Please login or register to access this page";
+			$_SESSION['view_msg'] = "Unable to access movie booking. Please login or register to access this page";
+			$statusCode = 303;
+			header('Location: ' . '/customer/login', true, $statusCode);
+			die();
+		}
 	}
-
-
 	public static function post_movie_booking($uri){
 		$arr = (array) $_POST;
 		global $repo;
 
-		$customer = $repo->find_customer_by_username($arr["username"])[0];
-		$arr["customerID"] = $customer["customerID"];
-		$movie_id = $arr["movieID"];
+		if (array_key_exists("auth_user", $_SESSION)){
+			$customer = $repo->find_customer_by_username($arr["username"])[0];
+			$arr["customerID"] = $customer["customerID"];
+			$movie_id = $arr["movieID"];
 
-		$bookingAdded = $repo->insert_new_booking($arr);
+			$bookingAdded = $repo->insert_new_booking($arr);
 
-		if ($bookingAdded["flag"]){
-			unset($_SESSION['booked_movie']);
+			if ($bookingAdded["flag"]){
+				unset($_SESSION['booked_movie']);
+			}
+
+			$statusCode = 303;
+			$_SESSION['movie_booking_msg'] = $bookingAdded["msg"];
+			$_SESSION['view_msg'] = $bookingAdded["msg"];
+			header('Location: ' . "/movie/listing/{$movie_id}", true, $statusCode);
+			die();
+		} else {
+			$_SESSION['login_msg'] = "Unable to access movie booking. Please login or register to access this page";
+			$_SESSION['view_msg'] = "Unable to access movie booking. Please login or register to access this page";
+			$statusCode = 303;
+			header('Location: ' . '/customer/login', true, $statusCode);
+			die();
 		}
-
-		$statusCode = 303;
-		$_SESSION['movie_booking_msg'] = $bookingAdded["msg"];
-		header('Location: ' . "/movie/listing/{$movie_id}", true, $statusCode);
-		die();
 	}
-
-
-
 }

@@ -10,17 +10,7 @@
 
 </div>
 
-<div>
-	<?php
-		if( isset( $_SESSION['repo_msg'] ) ) {
-			echo($_SESSION['repo_msg']);
-			unset($_SESSION['repo_msg']);
-		}
-	?>
-
-</div>
-
-<div class="pad1 text-sz-md text-wt-reg"> Create Account </div>
+<div class="pad-1 text-sz-md text-wt-reg"> Create Account </div>
 
 <form method="post" action="/customer/register">
 	<div class='pad-tb-2 w-lg text-sz-rg'>
@@ -30,7 +20,7 @@
 
 	<div class='pad-tb-2 w-lg text-sz-rg'>
 		<label for="password"> Password </label>
-		<input type="text" name="password" id="cust_password"/>
+		<input type="password" name="password" id="cust_password"/>
 	</div>
 
 	<div class='pad-tb-2 w-lg text-sz-rg'>

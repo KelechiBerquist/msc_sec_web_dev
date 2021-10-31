@@ -16,15 +16,26 @@ class CustomerController{
 			$_SESSION["auth_user"] = $repo->find_customer_by_username($arr["username"]);
 			$user_forename = $_SESSION["auth_user"]["customer_forename"];
 			$_SESSION['login_msg'] = "Welcome back, {$user_forename}!" ;
+			$_SESSION['view_msg'] = "Welcome back, {$user_forename}!" ;
 			$statusCode = 303;
 			header('Location: ' . '/movie/listing', true, $statusCode);
 			die();
 		} else {
 			$_SESSION['login_msg'] = 'Customer not found with username and password provided. Please check username and/or password';
+			$_SESSION['view_msg'] = 'Customer not found with username and password provided. Please check username and/or password';
 			$statusCode = 303;
 			header('Location: ' . '/customer/login', true, $statusCode);
 			die();
 		}
+	}
+	public static function get_logout(){
+		$user_forename = $_SESSION["auth_user"]["customer_forename"];
+		unset($_SESSION["auth_user"]);
+		$_SESSION['login_msg'] = "Logout successful. Goodbye {$user_forename}";
+		$_SESSION['view_msg'] = "Logout successful. Goodbye {$user_forename}";
+		$statusCode = 303;
+		header('Location: ' . '/movie/listing', true, $statusCode);
+		die();
 	}
 
 
@@ -41,6 +52,7 @@ class CustomerController{
 
 		$statusCode = 303;
 		$_SESSION['user_reg_msg'] = $userAdded["msg"];
+		$_SESSION['view_msg'] = $userAdded["msg"];
 		header('Location: ' . '/customer/register', true, $statusCode);
 		die();
 	}
