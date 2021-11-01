@@ -4,6 +4,10 @@ include __DIR__ . '/../controller/CustomerController.php';
 
 
 class CustomerRouter{
+	/*
+		This class acts as a sub-router for `/customer` paths.
+		It implements sub-routing for get and post http request methods.
+	*/
 	public static function route($uri){
 		switch ($_SERVER["REQUEST_METHOD"]) {
 			case 'GET':

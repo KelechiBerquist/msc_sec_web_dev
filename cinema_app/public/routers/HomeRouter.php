@@ -5,6 +5,10 @@ include __DIR__ . '/../controller/HomeController.php';
 
 
 class HomeRouter{
+	/*
+		This class acts as a sub-router for `/` paths.
+		It implements sub-routing for get and post http request methods.
+	*/
 	public static function route($uri){
 		switch ($_SERVER["REQUEST_METHOD"]) {
 			case 'GET':

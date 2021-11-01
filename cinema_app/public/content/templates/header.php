@@ -14,7 +14,7 @@
 		</div>
 		<div class="d-inline text-align-right w-60">
 			<?php
-				if (isset($_SESSION["auth-user"])){
+				if (array_key_exists("auth_user", $_SESSION)){
 					$auth_nav = "
 						<div class='d-inline w-20 marg-2 text-align-right nav-banner-text'>
 							<a class='' href='/customer/logout'>Logout</a>

@@ -1,15 +1,4 @@
 <?php include __DIR__ . '/templates/header.php'; ?>
-<!-- 
-<div>
-	<?php
-		if( isset( $_SESSION['login_msg'] ) ) {
-			echo($_SESSION['login_msg']);
-			unset($_SESSION['login_msg']);
-		}
-	?>
-
-</div> -->
-
 
 <div class='w-40 pad-10'>
 	<div class="w-100 pad-1 text-sz-md text-wt-reg pg-header-banner text-align-center">Login</div>

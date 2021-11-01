@@ -15,7 +15,7 @@
       <div class='w-100 d-inline text-sz-rg text-wt-reg text-align-justify pad-3 movie-details'>
         {$description}
 
-         <div class='button pad-tb-2 text-align-center text-sz-rg text-wt-reg'> 
+         <div class='button link-1 pad-tb-2 text-align-center text-sz-rg text-wt-reg'> 
             <a class='button' href='/movie/booking/{$movieID}'> Book now </a>
         </div>
       </div>
@@ -35,11 +35,3 @@
 </div>
 
 <?php include __DIR__ . '/templates/footer.php'; ?>
-
-
-<!--
-  `movieID` mediumint(8) UNSIGNED NOT NULL,
-  `movie_name` varchar(255) NOT NULL,
-  `description` text NOT NULL,
-  `ticket_price` decimal(7,2) NOT NULL,
-  `rating` char(3) NOT NULL -->

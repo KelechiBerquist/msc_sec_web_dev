@@ -7,6 +7,10 @@ include __DIR__ . '/MovieRouter.php';
 
 
 class Router{
+	/**
+	 * Performs first pass routing and re-routes request to other sub routers
+	 * depending on the requested sbub-route.
+	 */
 	public static function route(){
 		/*
 			Trim leading and trailing whitespace to get routes

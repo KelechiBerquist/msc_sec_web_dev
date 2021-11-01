@@ -5,6 +5,10 @@ include __DIR__ . '/../controller/MovieController.php';
 
 
 class MovieRouter{
+	/*
+		This class acts as a sub-router for `/movie` paths.
+		It implements sub-routing for get and post http request methods.
+	*/
 	public static function route($uri){
 		switch ($_SERVER["REQUEST_METHOD"]) {
 			case 'GET':
@@ -48,7 +52,7 @@ class MovieRouter{
 				MovieController::post_movie_listing($uri);
 				break;
 			case 'booking':
-				MovieController::post_movie_booking($uri);
+				MovieController::post_movie_booking();
 				break;
 			case 'register':
 				MovieController::post_movie_reg();

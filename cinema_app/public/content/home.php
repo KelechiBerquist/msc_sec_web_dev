@@ -2,15 +2,14 @@
 	include __DIR__ . "/templates/header.php";
 ?>
 
-<div class='h-100 no-blur'>
-	<div class='h-100'>
+<div class='h-100 w-100'>
+	<img class='home-img' src='../assets/images/cinema.jpg'/>
+	<div class='home-text text-sz-md text-wt-reg text-align-center'> 
+		<div> Welcome to Oakdale Cinema! </div>
+		<div> home to the best cinematic </div>
+		<div> experience in the world! </div>
+		<div class='pad-2 link-3'><a href="/movie/listing">View our listings </a></div>
 	</div>
-	<h1> Cinema Application </h1>
-
-	<a href="/user/register"> Register as a user </a>
-	<a href="/movie/register"> Register as a user </a>
-
-
 </div>
 
 
